@@ -1,6 +1,9 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.flex-horizontal {
+    display: flex;
+    flex-direction: horizontal;
+}
+
+.between-cards {
+    margin-top: 2em;
+    margin-left: 2em;
 }
