@@ -1,22 +1,52 @@
-import { Grid } from '@mui/material';
+import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import * as React from 'react';
 import DoggoCard from './DoggoCard';
+import { Breeds, Colors } from '../ts/enum';
 
 
 export default function DoggoDisplay() {
+  const [breed, setBreed] = React.useState('');
+  const [filteredDogs, setFilteredDogs] = React.useState(doggos);
+
+  const handleChangeBreed = (event: SelectChangeEvent) => {
+    const breed = event.target.value as string;
+    setBreed(breed);
+    const filteredDogs = doggos.filter((dog) => dog.details.breed === breed)
+    setFilteredDogs(filteredDogs);
+  }
+
+  const menuDogs = filteredDogs.map((doggo, index) => (
+    <div key={index} className="between-cards">
+      <DoggoCard 
+        datePublication={doggo.datePublication}
+        description={doggo.description}
+        srcImg={doggo.srcImg}
+        details={doggo.details}
+      />
+    </div>  
+  ))
+
   return ( 
-    <Grid container spacing={2}>
-      { doggos.map((doggo, index) => (
-        <div key={index} className="between-cards">
-          <DoggoCard 
-            datePublication={doggo.datePublication}
-            description={doggo.description}
-            srcImg={doggo.srcImg}
-            details={doggo.details}
-          />
-        </div>
-      ))}
-    </Grid>
+    <>
+      <FormControl fullWidth>
+      <InputLabel id="breed-select-label">Breed</InputLabel>
+        <Select
+          labelId="breed-label"
+          id="breed-select"
+          value={breed}
+          label="Breed"
+          onChange={handleChangeBreed}
+        >
+          {Object.entries(Breeds).map(([key, value]) => (
+            <MenuItem value={key}>{value}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      
+      <Grid container spacing={2}>
+        {menuDogs}
+      </Grid>
+    </ >
   );
 }
 
@@ -30,7 +60,7 @@ const doggos = [
     age: 7,
     details: {
       name: 'chef',
-      color: 'black',
+      color: 'brown',
       breed: 'husky',
       age: 7
     }
@@ -41,7 +71,7 @@ const doggos = [
     srcImg: 'https://furrybabiesinc.com/wp-content/uploads/2018/07/Husky-puppies-1-1200x896.jpg',
     details: {
       name: 'katherine',
-      color: 'red',
+      color: 'white',
       breed: 'husky',
       age: 1
     }
@@ -52,8 +82,8 @@ const doggos = [
     srcImg: 'https://animalso.com/wp-content/uploads/2017/02/Golden-Retriever-10.jpg',
     details: {
       name: 'alex',
-      color: 'red',
-      breed: 'husky',
+      color: 'brown',
+      breed: 'golden retriever',
       age: 4
     }
   },
@@ -63,8 +93,8 @@ const doggos = [
     srcImg: 'http://wallpapercave.com/wp/Z36RaRp.jpg',
     details: {
       name: 'martin',
-      color: 'red',
-      breed: 'husky',
+      color: 'brown',
+      breed: 'pitbull',
       age: 6
     }
   },
@@ -74,8 +104,8 @@ const doggos = [
     srcImg: 'https://res.cloudinary.com/fwkc-production/image/upload/c_thumb,dpr_3.0,f_auto,g_center,h_430,q_auto,w_768/v1/fwkc-prod/May_1',
     details: {
       name: 'berry',
-      color: 'red',
-      breed: 'husky',
+      color: 'brown',
+      breed: 'golden retriever',
       age: 4
     }
   },
@@ -85,8 +115,8 @@ const doggos = [
     srcImg: 'http://www.dog-learn.com/dog-breeds/west-highland-white-terrier/images/west-highland-white-terrier-white.jpg',
     details: {
       name: 'bobby',
-      color: 'red',
-      breed: 'husky',
+      color: 'white',
+      breed: 'west highland white terrier',
       age: 3
     }
   },
@@ -96,9 +126,9 @@ const doggos = [
     srcImg: 'https://www.rover.com/blog/wp-content/uploads/2019/07/cockerspaniel1.jpg',
     details: {
       name: 'coco',
-      color: 'red',
-      breed: 'husky',
-      age: 4
+      color: 'brown',
+      breed: 'cocker spaniel',
+      age: 1
     }
   },
   {
@@ -107,8 +137,8 @@ const doggos = [
     srcImg: 'https://justusdogs.com.au/wp-content/uploads/2017/08/american-cocker-spaniel.jpg',
     details: {
       name: 'kira',
-      color: 'red',
-      breed: 'husky',
+      color: 'brown',
+      breed: 'cocker spaniel',
       age: 2
     }
   },
