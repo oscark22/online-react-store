@@ -1,12 +1,14 @@
-import './App.css'
-import DoggoDisplay from './comps/DoggosDisplay'
+import Navbar from './comps/Navbar'
+import Router from './routes/Router'
 
 
-export default function App() {
+const App = () => {
   return (
     <>
-      <DoggoDisplay />
+      <Navbar />
+      <Router />
     </>
-  )
+  );
 }
-
+ 
+export default App;
