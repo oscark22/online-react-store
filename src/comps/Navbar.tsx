@@ -91,13 +91,13 @@ function ResponsiveAppBar() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Link to='/login'>
+            <Link to='/createAccount'>
               <Button
-                key="Login"
+                key="createAccount"
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                LOGIN
+                CREATE ACCOUNT
               </Button>
             </Link>
           </Box>
