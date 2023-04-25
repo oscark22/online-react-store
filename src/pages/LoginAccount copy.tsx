@@ -15,10 +15,12 @@ import React, { useContext } from "react";
 import { useFormik } from "formik";
 import { FormErrors, FormValues } from "../interfaces/UserForms";
 import {
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
-import auth from "../firebase";
+import auth, { googleProvider } from "../firebase";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { AuthContext } from "../context/AuthContext";
@@ -68,6 +70,30 @@ const LoginAccount = () => {
       });
   };
 
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+
+        if (!credential) {
+          return;
+        }
+
+        const token = credential.accessToken;
+        const user = result.user;
+
+        location.replace("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+
+        mySwal.fire("Error", errorMessage, "error");
+      });
+  };
+
   const formik = useFormik({
     initialValues: initialValues,
     validate: validate,
@@ -97,6 +123,7 @@ const LoginAccount = () => {
             onChange={formik.handleChange}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
+            autoComplete="on"
           />
           <TextField
             fullWidth
@@ -108,11 +135,17 @@ const LoginAccount = () => {
             onChange={formik.handleChange}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
+            autoComplete="on"
           />
           <Box>
             <Button type="submit">Sign in</Button>
           </Box>
         </Box>
+      </form>
+      <form onSubmit={formik.handleSubmit}>
+        <Button variant="contained" onClick={signInWithGoogle} fullWidth>
+          Google
+        </Button>
       </form>
     </Container>
   );
