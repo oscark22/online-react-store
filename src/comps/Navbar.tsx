@@ -13,6 +13,8 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Link } from "react-router-dom";
+import auth from "../firebase";
+import { AuthContext } from "../context/AuthContext";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -42,15 +44,15 @@ function ResponsiveAppBar() {
 
   interface Link {
     link: string;
-    key: string;
+    ukey: string;
     text: string;
   }
 
-  const LinkItem = ({ link, key, text }: Link) => {
+  const LinkItem = ({ link, ukey, text }: Link) => {
     return (
       <Link to={link}>
         <Button
-          key={key}
+          key={ukey}
           onClick={handleCloseNavMenu}
           sx={{ my: 2, color: "white", display: "block" }}
         >
@@ -58,6 +60,15 @@ function ResponsiveAppBar() {
         </Button>
       </Link>
     );
+  };
+
+  const authContext = React.useContext(AuthContext);
+  const loggedIn = authContext.loggedIn;
+  console.log(loggedIn);
+
+  const handleLogout = () => {
+    authContext.logout();
+    location.replace("/signIn");
   };
 
   return (
@@ -114,9 +125,19 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <LinkItem key="signUp" link="/signUp" text="SIGN UP" />
-            <LinkItem key="signIn" link="/signIn" text="SIGN IN" />
+            <LinkItem ukey="signUp" link="/signUp" text="SIGN UP" />
+            {loggedIn ? (
+              <Button
+                onClick={handleLogout}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                LOGOUT
+              </Button>
+            ) : (
+              <LinkItem ukey="signIn" link="/signIn" text="SIGN IN" />
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

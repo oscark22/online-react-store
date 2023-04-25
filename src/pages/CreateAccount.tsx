@@ -45,19 +45,17 @@ const validate = (values: FormValues): FormErrors => {
 };
 
 export const signUpEmailAndPassword = (values: FormValues) => {
+  console.log("here");
   createUserWithEmailAndPassword(auth, values.email, values.password)
     .then((userCredential) => {
-      mySwal.fire(
-        "Success!",
-        "The account was created successfully",
-        "success"
-      );
+      mySwal
+        .fire("Success!", "The account was created successfully", "success")
+        .then(() => location.replace("/"));
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
 
-      // TODO catch specific errors
       mySwal.fire("Error", errorMessage, "error");
     });
 };
@@ -75,36 +73,40 @@ const CreateAccount = () => {
         title="Sign Up"
         subtitle="Insert the following data to create an account."
       />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 1,
-        }}
-      >
-        <TextField
-          fullWidth
-          id="email"
-          name="email"
-          label="Email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-        />
-        <TextField
-          fullWidth
-          id="password"
-          name="password"
-          label="Password"
-          type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-        />
-      </Box>
-      <Button>Sign up</Button>
+      <form onSubmit={formik.handleSubmit}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+          }}
+        >
+          <TextField
+            fullWidth
+            id="email"
+            name="email"
+            label="Email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            fullWidth
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+          <Box>
+            <Button type="submit">Sign up</Button>
+          </Box>
+        </Box>
+      </form>
     </Container>
   );
 };
