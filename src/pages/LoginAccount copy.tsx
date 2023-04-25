@@ -44,12 +44,12 @@ const validate = (values: FormValues): FormErrors => {
   return errors;
 };
 
-export const signUpEmailAndPassword = (values: FormValues) => {
+export const signInEmailAndPassword = (values: FormValues) => {
   createUserWithEmailAndPassword(auth, values.email, values.password)
     .then((userCredential) => {
       mySwal.fire(
         "Success!",
-        "The account was created successfully",
+        "You have been logged in successfully",
         "success"
       );
     })
@@ -62,18 +62,18 @@ export const signUpEmailAndPassword = (values: FormValues) => {
     });
 };
 
-const CreateAccount = () => {
+const LoginAccount = () => {
   const formik = useFormik({
     initialValues: initialValues,
     validate: validate,
-    onSubmit: signUpEmailAndPassword,
+    onSubmit: signInEmailAndPassword,
   });
 
   return (
     <Container maxWidth="md" sx={{ justifySelf: "center" }}>
       <Header
-        title="Sign Up"
-        subtitle="Insert the following data to create an account."
+        title="Sign In"
+        subtitle="Insert the following data to sign in into your account."
       />
       <Box
         sx={{
@@ -104,9 +104,9 @@ const CreateAccount = () => {
           helperText={formik.touched.password && formik.errors.password}
         />
       </Box>
-      <Button>Sign up</Button>
+      <Button>Sign in</Button>
     </Container>
   );
 };
 
-export default CreateAccount;
+export default LoginAccount;
