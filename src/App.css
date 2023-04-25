@@ -1,3 +1,11 @@
+html,
+body,
+#root,
+.app,
+.content {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+}
+
 .flex-horizontal {
     display: flex;
     flex-direction: horizontal;
