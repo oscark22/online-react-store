@@ -1,8 +1,6 @@
 import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import * as React from 'react';
 import DoggoCard from './DoggoCard';
-import { Breeds, Colors } from '../ts/enum';
-
 
 export default function DoggoDisplay() {
   const [breed, setBreed] = React.useState('');
@@ -28,21 +26,6 @@ export default function DoggoDisplay() {
 
   return ( 
     <>
-      <FormControl fullWidth>
-      <InputLabel id="breed-select-label">Breed</InputLabel>
-        <Select
-          labelId="breed-label"
-          id="breed-select"
-          value={breed}
-          label="Breed"
-          onChange={handleChangeBreed}
-        >
-          {Object.entries(Breeds).map(([key, value]) => (
-            <MenuItem value={key}>{value}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      
       <Grid container spacing={2}>
         {menuDogs}
       </Grid>
@@ -53,6 +36,54 @@ export default function DoggoDisplay() {
 
 // example data of doggos.
 const doggos = [
+  {
+    datePublication: new Date(2022, 11, 29),
+    description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
+    srcImg: 'http://cdn0.wideopenpets.com/wp-content/uploads/2017/05/AdobeStock_126472771.jpeg',
+    age: 7,
+    details: {
+      name: 'chef',
+      color: 'brown',
+      breed: 'husky',
+      age: 7
+    }
+  },
+  {
+    datePublication: new Date(2022, 11, 29),
+    description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
+    srcImg: 'http://cdn0.wideopenpets.com/wp-content/uploads/2017/05/AdobeStock_126472771.jpeg',
+    age: 7,
+    details: {
+      name: 'chef',
+      color: 'brown',
+      breed: 'husky',
+      age: 7
+    }
+  },
+  {
+    datePublication: new Date(2022, 11, 29),
+    description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
+    srcImg: 'http://cdn0.wideopenpets.com/wp-content/uploads/2017/05/AdobeStock_126472771.jpeg',
+    age: 7,
+    details: {
+      name: 'chef',
+      color: 'brown',
+      breed: 'husky',
+      age: 7
+    }
+  },
+  {
+    datePublication: new Date(2022, 11, 29),
+    description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
+    srcImg: 'http://cdn0.wideopenpets.com/wp-content/uploads/2017/05/AdobeStock_126472771.jpeg',
+    age: 7,
+    details: {
+      name: 'chef',
+      color: 'brown',
+      breed: 'husky',
+      age: 7
+    }
+  },
   {
     datePublication: new Date(2022, 11, 29),
     description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
