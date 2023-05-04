@@ -12,12 +12,12 @@ interface Props {
 }
 
 const AuthContext = createContext<AuthContextType>({
-  loggedIn: false,
+  loggedIn: true,
   logout: () => {},
 });
 
 const AuthProvider: React.FC<Props> = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {

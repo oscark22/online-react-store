@@ -45,7 +45,6 @@ const validate = (values: FormValues): FormErrors => {
 };
 
 export const signUpEmailAndPassword = (values: FormValues) => {
-  console.log("here");
   createUserWithEmailAndPassword(auth, values.email, values.password)
     .then((userCredential) => {
       mySwal
