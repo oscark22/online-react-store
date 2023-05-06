@@ -1,4 +1,4 @@
-import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography, capitalize } from '@mui/material';
+import { Grid, Typography, capitalize } from '@mui/material';
 import * as React from 'react';
 import DoggoCard from './DoggoCard';
 import { useRef } from 'react';
@@ -38,7 +38,7 @@ export default function DoggoDisplay() {
         </Typography>
       </Grid>
       {dogsByBreed[breed].map((doggo, index) => (
-        <Grid item xs={12} sm={6} md={4} key={index}>
+        <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
           <div className="between-cards">
             <DoggoCard
               datePublication={doggo.datePublication}
