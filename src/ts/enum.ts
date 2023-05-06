@@ -1,9 +1,9 @@
 export enum Breeds {
-    "husky" = 'Husky',
-    "golden retriever" = 'Golden Retriever',
-    "pitbull" = 'Pitbull',
-    "west highland white terrier" = 'West Highland White Terrier',
-    "cocker spaniel" = 'Cocker Spaniel'
+    "Husky" = 'Husky',
+    "Golden Retriever" = 'Golden Retriever',
+    "Pitbull" = 'Pitbull',
+    "West Highland White Terrier" = 'West Highland White Terrier',
+    "Cocker Spaniel" = 'Cocker Spaniel'
 }
 
 export enum Colors {

@@ -1,38 +1,72 @@
-import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Typography, capitalize } from '@mui/material';
 import * as React from 'react';
 import DoggoCard from './DoggoCard';
+import { useRef } from 'react';
 
 export default function DoggoDisplay() {
-  const [breed, setBreed] = React.useState('');
   const [filteredDogs, setFilteredDogs] = React.useState(doggos);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleChangeBreed = (event: SelectChangeEvent) => {
-    const breed = event.target.value as string;
-    setBreed(breed);
-    const filteredDogs = doggos.filter((dog) => dog.details.breed === breed)
-    setFilteredDogs(filteredDogs);
-  }
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const container = event.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const maxScrollLeft = container.scrollWidth - container.clientWidth;
 
-  const menuDogs = filteredDogs.map((doggo, index) => (
-    <div key={index} className="between-cards">
-      <DoggoCard 
-        datePublication={doggo.datePublication}
-        description={doggo.description}
-        srcImg={doggo.srcImg}
-        details={doggo.details}
-      />
-    </div>  
-  ))
+    if (scrollLeft === maxScrollLeft) {
+      container.classList.remove('scrollable');
+      container.classList.add('not-scrollable-right');
+    } else {
+      container.classList.add('scrollable');
+      container.classList.remove('not-scrollable-right');
+    }
+  };
 
-  return ( 
-    <>
-      <Grid container spacing={2}>
-        {menuDogs}
+  const dogsByBreed: Record<string, any[]> = filteredDogs.reduce((acc, doggo) => {
+    const breed = doggo.details.breed;
+    if (!acc[breed]) {
+      acc[breed] = [];
+    }
+    acc[breed].push(doggo);
+    return acc;
+  }, {});
+
+  const menuDogs = Object.keys(dogsByBreed).map((breed) => (
+    <Grid container key={breed}>
+      <Grid item xs={12}>
+        <Typography variant="h4" style={{ marginTop: "2rem", fontWeight: "bold", textAlign: "center"}}>
+          {capitalize(breed)}
+        </Typography>
       </Grid>
-    </ >
-  );
+      {dogsByBreed[breed].map((doggo, index) => (
+        <Grid item xs={12} sm={6} md={4} key={index}>
+          <div className="between-cards">
+            <DoggoCard
+              datePublication={doggo.datePublication}
+              description={doggo.description}
+              srcImg={doggo.srcImg}
+              details={doggo.details}
+            />
+          </div>
+        </Grid>
+      ))}
+    </Grid>
+    ));
+    
+    React.useEffect(() => {
+      const container = containerRef.current;
+      if (container) {
+        container.classList.add('scrollable');
+      }
+    }, []);
+  
+    return (
+      <div ref={containerRef} onScroll={handleScroll} className="doggo-display-container">
+        <Grid container spacing={2}>
+          {menuDogs}
+        </Grid>
+      </div>
+    );
 }
-
 
 // example data of doggos.
 const doggos = [
