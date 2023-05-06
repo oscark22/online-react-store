@@ -5,21 +5,6 @@ import { useRef } from 'react';
 
 export default function DoggoDisplay() {
   const [filteredDogs, setFilteredDogs] = React.useState(doggos);
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-    const container = event.currentTarget;
-    const scrollLeft = container.scrollLeft;
-    const maxScrollLeft = container.scrollWidth - container.clientWidth;
-
-    if (scrollLeft === maxScrollLeft) {
-      container.classList.remove('scrollable');
-      container.classList.add('not-scrollable-right');
-    } else {
-      container.classList.add('scrollable');
-      container.classList.remove('not-scrollable-right');
-    }
-  };
 
   const dogsByBreed: Record<string, any[]> = filteredDogs.reduce((acc, doggo) => {
     const breed = doggo.details.breed;
@@ -51,16 +36,9 @@ export default function DoggoDisplay() {
       ))}
     </Grid>
     ));
-    
-    React.useEffect(() => {
-      const container = containerRef.current;
-      if (container) {
-        container.classList.add('scrollable');
-      }
-    }, []);
   
     return (
-      <div ref={containerRef} onScroll={handleScroll} className="doggo-display-container">
+      <div>
         <Grid container spacing={2}>
           {menuDogs}
         </Grid>
