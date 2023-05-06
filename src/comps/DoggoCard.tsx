@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea } from '@mui/material';
 
 
-interface Props {
+export interface Props {
   datePublication: Date,
   description: string,
   srcImg: string,

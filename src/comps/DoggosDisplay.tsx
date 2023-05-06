@@ -1,19 +1,20 @@
 import { Grid, Typography, capitalize } from '@mui/material';
 import * as React from 'react';
 import DoggoCard from './DoggoCard';
-import { useRef } from 'react';
 
 export default function DoggoDisplay() {
   const [filteredDogs, setFilteredDogs] = React.useState(doggos);
 
-  const dogsByBreed: Record<string, any[]> = filteredDogs.reduce((acc, doggo) => {
+  const dogsByBreed: Record<string, any[]> = filteredDogs.reduce((acc: any, doggo) => {
     const breed = doggo.details.breed;
+    console.log(typeof acc[breed]);
     if (!acc[breed]) {
       acc[breed] = [];
     }
     acc[breed].push(doggo);
     return acc;
   }, {});
+
 
   const menuDogs = Object.keys(dogsByBreed).map((breed) => (
     <Grid container key={breed}>
