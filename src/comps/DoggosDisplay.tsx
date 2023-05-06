@@ -1,38 +1,50 @@
-import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { Grid, Typography, capitalize } from '@mui/material';
 import * as React from 'react';
 import DoggoCard from './DoggoCard';
+import { useRef } from 'react';
 
 export default function DoggoDisplay() {
-  const [breed, setBreed] = React.useState('');
   const [filteredDogs, setFilteredDogs] = React.useState(doggos);
 
-  const handleChangeBreed = (event: SelectChangeEvent) => {
-    const breed = event.target.value as string;
-    setBreed(breed);
-    const filteredDogs = doggos.filter((dog) => dog.details.breed === breed)
-    setFilteredDogs(filteredDogs);
-  }
+  const dogsByBreed: Record<string, any[]> = filteredDogs.reduce((acc, doggo) => {
+    const breed = doggo.details.breed;
+    if (!acc[breed]) {
+      acc[breed] = [];
+    }
+    acc[breed].push(doggo);
+    return acc;
+  }, {});
 
-  const menuDogs = filteredDogs.map((doggo, index) => (
-    <div key={index} className="between-cards">
-      <DoggoCard 
-        datePublication={doggo.datePublication}
-        description={doggo.description}
-        srcImg={doggo.srcImg}
-        details={doggo.details}
-      />
-    </div>  
-  ))
-
-  return ( 
-    <>
-      <Grid container spacing={2}>
-        {menuDogs}
+  const menuDogs = Object.keys(dogsByBreed).map((breed) => (
+    <Grid container key={breed}>
+      <Grid item xs={12}>
+        <Typography variant="h4" style={{ marginTop: "2rem", fontWeight: "bold", textAlign: "center"}}>
+          {capitalize(breed)}
+        </Typography>
       </Grid>
-    </ >
-  );
+      {dogsByBreed[breed].map((doggo, index) => (
+        <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+          <div className="between-cards">
+            <DoggoCard
+              datePublication={doggo.datePublication}
+              description={doggo.description}
+              srcImg={doggo.srcImg}
+              details={doggo.details}
+            />
+          </div>
+        </Grid>
+      ))}
+    </Grid>
+    ));
+  
+    return (
+      <div>
+        <Grid container spacing={2}>
+          {menuDogs}
+        </Grid>
+      </div>
+    );
 }
-
 
 // example data of doggos.
 const doggos = [
