@@ -53,7 +53,6 @@ const doggos = [
     datePublication: new Date(2022, 11, 29),
     description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
     srcImg: 'http://cdn0.wideopenpets.com/wp-content/uploads/2017/05/AdobeStock_126472771.jpeg',
-    age: 7,
     details: {
       name: 'chef',
       color: 'brown',
@@ -65,7 +64,6 @@ const doggos = [
     datePublication: new Date(2022, 11, 29),
     description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
     srcImg: 'http://cdn0.wideopenpets.com/wp-content/uploads/2017/05/AdobeStock_126472771.jpeg',
-    age: 7,
     details: {
       name: 'chef',
       color: 'brown',
@@ -77,7 +75,6 @@ const doggos = [
     datePublication: new Date(2022, 11, 29),
     description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
     srcImg: 'http://cdn0.wideopenpets.com/wp-content/uploads/2017/05/AdobeStock_126472771.jpeg',
-    age: 7,
     details: {
       name: 'chef',
       color: 'brown',
@@ -89,7 +86,6 @@ const doggos = [
     datePublication: new Date(2022, 11, 29),
     description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
     srcImg: 'http://cdn0.wideopenpets.com/wp-content/uploads/2017/05/AdobeStock_126472771.jpeg',
-    age: 7,
     details: {
       name: 'chef',
       color: 'brown',
@@ -101,7 +97,6 @@ const doggos = [
     datePublication: new Date(2022, 11, 29),
     description: 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
     srcImg: 'http://cdn0.wideopenpets.com/wp-content/uploads/2017/05/AdobeStock_126472771.jpeg',
-    age: 7,
     details: {
       name: 'chef',
       color: 'brown',

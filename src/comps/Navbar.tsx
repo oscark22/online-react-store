@@ -16,9 +16,42 @@ import { Link } from "react-router-dom";
 import auth from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { TextField } from "@mui/material";
+import { useState } from "react";
+import SearchUI from "./SearchBar";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
+const initialOptions = [
+  { value: 'name', label: 'Nombre' },
+  { value: 'breed', label: 'Raza' },
+  { value: 'color', label: 'Color' },
+];
+
+const Search = () => {
+  const [searchOption, setSearchOption] = useState(initialOptions[0]);
+  const [searchValue, setSearchValue] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  
+  if (!searchValue || !isNaN(searchValue)) {
+    // mostrar mensaje de error aquí
+    return;
+  }
+  
+  const filteredResults = results.filter((result) => {
+    const value = searchOption.value;
+    const searchTerm = searchValue.toLowerCase();
+    const resultValue = result[value].toLowerCase();
+    return resultValue.includes(searchTerm);
+  });
+  
+  setSearchResults(filteredResults);
+  
+  return (
+    <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+    </Box>
+  );
+};
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -65,31 +98,6 @@ function ResponsiveAppBar() {
 
   const authContext = React.useContext(AuthContext);
   const loggedIn = authContext.loggedIn;
-
-  const [productName, setProductName] = React.useState("");
-  const [category, setCategory] = React.useState("");
-  const [subCategory, setSubCategory] = React.useState("");
-  const [itemId, setItemId] = React.useState("");
-
-  const handleProductNameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setProductName(event.target.value);
-  };
-
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCategory(event.target.value);
-  };
-
-  const handleSubCategoryChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSubCategory(event.target.value);
-  };
-
-  const handleItemIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setItemId(event.target.value);
-  };
 
   const handleLogout = () => {
     authContext.logout();
@@ -168,39 +176,15 @@ function ResponsiveAppBar() {
               </>
             )}
           </Box>
-
+          <SearchUI
+            options={initialOptions}
+            searchOption={searchOption}
+            onOptionChange={setSearchOption}
+            searchValue={searchValue}
+            onValueChange={setSearchValue}
+            onSearch={search}
+          />
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <TextField
-              label="Product Name"
-              value={productName}
-              onChange={handleProductNameChange}
-              sx={{ mr: 2 }}
-              InputProps={{ style: { color: "white" } }}
-              InputLabelProps={{ style: { color: "white" } }}
-            />
-            <TextField
-              label="Category"
-              value={category}
-              onChange={handleCategoryChange}
-              sx={{ mr: 2 }}
-              InputProps={{ style: { color: "white" } }}
-              InputLabelProps={{ style: { color: "white" } }}
-            />
-            <TextField
-              label="Sub-Category"
-              value={subCategory}
-              onChange={handleSubCategoryChange}
-              sx={{ mr: 2 }}
-              InputProps={{ style: { color: "white" } }}
-              InputLabelProps={{ style: { color: "white" } }}
-            />
-            <TextField
-              label="Item ID"
-              value={itemId}
-              onChange={handleItemIdChange}
-              InputProps={{ style: { color: "white" } }}
-              InputLabelProps={{ style: { color: "white" } }}
-            />
           </Box>
 
           <Button
