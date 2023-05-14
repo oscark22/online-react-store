@@ -1,7 +1,7 @@
 <div align="center">
   <h2>Online React Store (Playwright testing)</h2>
 </div>
-A bad looking webstore implementation made with React, Material UI and Firebase for playwright testing
+A bad looking webstore implementation made with React, Material UI and Firebase for playwright testing.
 
 ## Overview
 This repository is a simple bad looking online react web store for learning web testing with Playwright. Feel free to use this template if it's useful for you.
