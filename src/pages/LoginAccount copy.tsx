@@ -138,7 +138,7 @@ const LoginAccount = () => {
             autoComplete="on"
           />
           <Box>
-            <Button type="submit">Sign in</Button>
+            <Button type="submit">Login</Button>
           </Box>
         </Box>
       </form>
