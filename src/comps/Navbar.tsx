@@ -4,54 +4,14 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Link } from "react-router-dom";
-import auth from "../firebase";
 import { AuthContext } from "../context/AuthContext";
-import { TextField } from "@mui/material";
-import { useState } from "react";
-import SearchUI from "./SearchBar";
-
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-const initialOptions = [
-  { value: 'name', label: 'Nombre' },
-  { value: 'breed', label: 'Raza' },
-  { value: 'color', label: 'Color' },
-];
-
-const Search = () => {
-  const [searchOption, setSearchOption] = useState(initialOptions[0]);
-  const [searchValue, setSearchValue] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  
-  if (!searchValue || !isNaN(searchValue)) {
-    // mostrar mensaje de error aquí
-    return;
-  }
-  
-  const filteredResults = results.filter((result) => {
-    const value = searchOption.value;
-    const searchTerm = searchValue.toLowerCase();
-    const resultValue = result[value].toLowerCase();
-    return resultValue.includes(searchTerm);
-  });
-  
-  setSearchResults(filteredResults);
-  
-  return (
-    <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-    </Box>
-  );
-};
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -70,10 +30,6 @@ function ResponsiveAppBar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   interface Link {
@@ -176,14 +132,6 @@ function ResponsiveAppBar() {
               </>
             )}
           </Box>
-          <SearchUI
-            options={initialOptions}
-            searchOption={searchOption}
-            onOptionChange={setSearchOption}
-            searchValue={searchValue}
-            onValueChange={setSearchValue}
-            onSearch={search}
-          />
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
           </Box>
 
