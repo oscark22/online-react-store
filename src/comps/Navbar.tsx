@@ -57,14 +57,6 @@ function ResponsiveAppBar() {
     location.replace("/signIn");
   };
 
-  const theme = createTheme({
-    palette: {
-      text: {
-        primary: '#ffffff',
-      },
-    },
-  });
-
   return (
     <AppBar position="static" sx={{ marginBottom: 3 }}>
       <Container maxWidth="xl">
@@ -137,53 +129,6 @@ function ResponsiveAppBar() {
               </>
             )}
           </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <ThemeProvider theme={theme}>
-              <TextField
-                id="search-input"
-                label={ <Typography sx={{ color: "white" }} > Buscar </Typography> }
-                variant="outlined"
-                sx={{ mr: 2 }}
-              />
-            </ThemeProvider>
-            <FormControl>
-              <FormLabel sx={{ color: "white" }} id="form-filter"> Filtros: </FormLabel>
-              <RadioGroup         
-                aria-labelledby="form-filter"
-                defaultValue="id"
-                name="radio-buttons-group"
-                row
-              >
-                <FormControlLabel
-                  control={<Radio sx={{ '&.Mui-checked': {color: green[200] } }} />}
-                  label="ID"
-                  value="id"
-                />
-                <FormControlLabel
-                  control={<Radio sx={{ '&.Mui-checked': {color: green[200] } }} />}
-                  label="Raza"
-                  value="raza"
-                />
-                <FormControlLabel
-                  control={<Radio sx={{ '&.Mui-checked': {color: green[200] } }} />}
-                  label="Nombre"
-                  value="nombre"
-                />
-              </RadioGroup>
-            </FormControl>
-          </Box>
-
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ my: 2, mr: 3, color: "white", display: "block" }}
-            onClick={() => {
-              
-            }}
-          >
-            BUSCAR
-          </Button>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Abrir carrito">

@@ -8,6 +8,7 @@ import { Button, CardActionArea } from '@mui/material';
 
 
 export interface Props {
+  id: number,
   datePublication: Date,
   description: string,
   srcImg: string,
