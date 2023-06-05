@@ -12,6 +12,8 @@ import AdbIcon from "@mui/icons-material/Adb";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField } from "@mui/material";
+import { pink } from "@mui/material/colors";
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -20,6 +22,12 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+
+  const [filterSelected, setFilterSelected] = React.useState(false);
+
+  const handleCheckboxChange = () => {
+    setFilterSelected(!filterSelected);
+  };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -135,6 +143,33 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
           </Box>
 
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <TextField
+            id="search-input"
+            label={<Typography sx={{ color: "white" }}>Buscar</Typography>}
+            variant="outlined"
+            sx={{ mr: 2 }}
+            />
+            <FormControl component="fieldset" sx={{ display: "flex", alignItems: "center" }}>
+              <FormLabel component="legend" sx={{ color: "white" }}>Filtros:</FormLabel>
+              <FormGroup sx={{ ml: 1 }}>
+                <FormControlLabel
+                  control={<Checkbox onChange={handleCheckboxChange} />}
+                  label="Raza"
+                />
+                <FormControlLabel
+                  control={<Checkbox onChange={handleCheckboxChange} sx={{color: pink[800], '&.Mui-checked': {color: pink[600], }, }} />}
+                  label="ID"
+
+                />
+                <FormControlLabel
+                  control={<Checkbox onChange={handleCheckboxChange} />}
+                  label="Nombre"
+                />
+              </FormGroup>
+            </FormControl>
+          </Box>
+
           <Button
             variant="contained"
             color="primary"
@@ -143,11 +178,11 @@ function ResponsiveAppBar() {
               
             }}
           >
-            Buscar
+            BUSCAR
           </Button>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Abrir carrito">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <AddShoppingCartIcon sx={{ color: "white" }} />
               </IconButton>
