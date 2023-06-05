@@ -1,19 +1,12 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import AdbIcon from "@mui/icons-material/Adb";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField } from "@mui/material";
-import { pink } from "@mui/material/colors";
+import { AppBar, Box, Toolbar, IconButton, Typography, Container, Button, Tooltip, FormControl, FormControlLabel, FormGroup, FormLabel, Radio, RadioGroup, TextField, createTheme } from "@mui/material";
+import { green } from "@mui/material/colors";
+import { ThemeProvider } from "@emotion/react";
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -24,10 +17,6 @@ function ResponsiveAppBar() {
   );
 
   const [filterSelected, setFilterSelected] = React.useState(false);
-
-  const handleCheckboxChange = () => {
-    setFilterSelected(!filterSelected);
-  };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -67,6 +56,14 @@ function ResponsiveAppBar() {
     authContext.logout();
     location.replace("/signIn");
   };
+
+  const theme = createTheme({
+    palette: {
+      text: {
+        primary: '#ffffff',
+      },
+    },
+  });
 
   return (
     <AppBar position="static" sx={{ marginBottom: 3 }}>
@@ -140,33 +137,40 @@ function ResponsiveAppBar() {
               </>
             )}
           </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <TextField
-            id="search-input"
-            label={<Typography sx={{ color: "white" }}>Buscar</Typography>}
-            variant="outlined"
-            sx={{ mr: 2 }}
-            />
-            <FormControl component="fieldset" sx={{ display: "flex", alignItems: "center" }}>
-              <FormLabel component="legend" sx={{ color: "white" }}>Filtros:</FormLabel>
-              <FormGroup sx={{ ml: 1 }}>
+            <ThemeProvider theme={theme}>
+              <TextField
+                id="search-input"
+                label={ <Typography sx={{ color: "white" }} > Buscar </Typography> }
+                variant="outlined"
+                sx={{ mr: 2 }}
+              />
+            </ThemeProvider>
+            <FormControl>
+              <FormLabel sx={{ color: "white" }} id="form-filter"> Filtros: </FormLabel>
+              <RadioGroup         
+                aria-labelledby="form-filter"
+                defaultValue="id"
+                name="radio-buttons-group"
+                row
+              >
                 <FormControlLabel
-                  control={<Checkbox onChange={handleCheckboxChange} />}
-                  label="Raza"
-                />
-                <FormControlLabel
-                  control={<Checkbox onChange={handleCheckboxChange} sx={{color: pink[800], '&.Mui-checked': {color: pink[600], }, }} />}
+                  control={<Radio sx={{ '&.Mui-checked': {color: green[200] } }} />}
                   label="ID"
-
+                  value="id"
                 />
                 <FormControlLabel
-                  control={<Checkbox onChange={handleCheckboxChange} />}
-                  label="Nombre"
+                  control={<Radio sx={{ '&.Mui-checked': {color: green[200] } }} />}
+                  label="Raza"
+                  value="raza"
                 />
-              </FormGroup>
+                <FormControlLabel
+                  control={<Radio sx={{ '&.Mui-checked': {color: green[200] } }} />}
+                  label="Nombre"
+                  value="nombre"
+                />
+              </RadioGroup>
             </FormControl>
           </Box>
 
