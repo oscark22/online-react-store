@@ -42,7 +42,7 @@ const DoggoCard: React.FC<Props> = ({ datePublication, description, srcImg, deta
             { datePublication.toString().slice(0, 15) }
           </Typography>
           <Typography variant="body2" color="text.secondary">
-              Age: {details.age} {details.age == 1 ? "year" : "years"} old.
+              Edad: {details.age} {details.age == 1 ? "year" : "years"} old.
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -52,7 +52,7 @@ const DoggoCard: React.FC<Props> = ({ datePublication, description, srcImg, deta
           { description }
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Breed: { capitalize(details.breed) }
+          Raza: { capitalize(details.breed) }
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Color: { details.color }
@@ -61,7 +61,7 @@ const DoggoCard: React.FC<Props> = ({ datePublication, description, srcImg, deta
 
       <CardActions disableSpacing>
         <Button size="small" color="primary">
-          Add to cart
+          Adoptar
         </Button>
       </CardActions>
     </Card>
