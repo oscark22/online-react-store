@@ -140,10 +140,10 @@ function ResponsiveAppBar() {
             color="primary"
             sx={{ my: 2, mr: 3, color: "white", display: "block" }}
             onClick={() => {
-              // Aquí se puede implementar la lógica para actualizar lo que se muestra en la página principal según los parámetros de búsqueda
+              
             }}
           >
-            Search
+            Buscar
           </Button>
 
           <Box sx={{ flexGrow: 0 }}>
