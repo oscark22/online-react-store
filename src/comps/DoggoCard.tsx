@@ -61,7 +61,7 @@ const DoggoCard: React.FC<Props> = ({ datePublication, description, srcImg, deta
 
       <CardActions disableSpacing>
         <Button size="small" color="primary">
-          Add to cart
+          Adoptar
         </Button>
       </CardActions>
     </Card>
