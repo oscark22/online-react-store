@@ -1,24 +1,12 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Link } from "react-router-dom";
-import auth from "../firebase";
 import { AuthContext } from "../context/AuthContext";
-import { TextField } from "@mui/material";
-
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { AppBar, Box, Toolbar, IconButton, Typography, Container, Button, Tooltip, FormControl, FormControlLabel, FormGroup, FormLabel, Radio, RadioGroup, TextField, createTheme } from "@mui/material";
+import { green } from "@mui/material/colors";
+import { ThemeProvider } from "@emotion/react";
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -27,6 +15,8 @@ function ResponsiveAppBar() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+
+  const [filterSelected, setFilterSelected] = React.useState(false);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -37,10 +27,6 @@ function ResponsiveAppBar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   interface Link {
@@ -65,31 +51,6 @@ function ResponsiveAppBar() {
 
   const authContext = React.useContext(AuthContext);
   const loggedIn = authContext.loggedIn;
-
-  const [productName, setProductName] = React.useState("");
-  const [category, setCategory] = React.useState("");
-  const [subCategory, setSubCategory] = React.useState("");
-  const [itemId, setItemId] = React.useState("");
-
-  const handleProductNameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setProductName(event.target.value);
-  };
-
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCategory(event.target.value);
-  };
-
-  const handleSubCategoryChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSubCategory(event.target.value);
-  };
-
-  const handleItemIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setItemId(event.target.value);
-  };
 
   const handleLogout = () => {
     authContext.logout();
@@ -169,53 +130,8 @@ function ResponsiveAppBar() {
             )}
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <TextField
-              label="Product Name"
-              value={productName}
-              onChange={handleProductNameChange}
-              sx={{ mr: 2 }}
-              InputProps={{ style: { color: "white" } }}
-              InputLabelProps={{ style: { color: "white" } }}
-            />
-            <TextField
-              label="Category"
-              value={category}
-              onChange={handleCategoryChange}
-              sx={{ mr: 2 }}
-              InputProps={{ style: { color: "white" } }}
-              InputLabelProps={{ style: { color: "white" } }}
-            />
-            <TextField
-              label="Sub-Category"
-              value={subCategory}
-              onChange={handleSubCategoryChange}
-              sx={{ mr: 2 }}
-              InputProps={{ style: { color: "white" } }}
-              InputLabelProps={{ style: { color: "white" } }}
-            />
-            <TextField
-              label="Item ID"
-              value={itemId}
-              onChange={handleItemIdChange}
-              InputProps={{ style: { color: "white" } }}
-              InputLabelProps={{ style: { color: "white" } }}
-            />
-          </Box>
-
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ my: 2, mr: 3, color: "white", display: "block" }}
-            onClick={() => {
-              // Aquí se puede implementar la lógica para actualizar lo que se muestra en la página principal según los parámetros de búsqueda
-            }}
-          >
-            Search
-          </Button>
-
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Abrir carrito">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <AddShoppingCartIcon sx={{ color: "white" }} />
               </IconButton>
