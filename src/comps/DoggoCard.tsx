@@ -34,7 +34,7 @@ const DoggoCard: React.FC<Props> = ({ datePublication, description, srcImg, deta
         alt="a doggo image"
       />
 
-      <CardActionArea>
+      <CardActionArea href='/ProductDetails'>
         <CardContent>
           <Typography variant="h5" component="div">
             { capitalize(details.name) }
