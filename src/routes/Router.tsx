@@ -4,6 +4,7 @@ import CreateAccount from "../pages/CreateAccount";
 import LoginAccount from "../pages/LoginAccount copy";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import ProductView from "../pages/ProductDetails";
 
 interface ProtectedRoute {
   isLoggedIn: boolean;
@@ -46,6 +47,10 @@ const Router = () => {
       <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
+      <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+        <Route path="/" element={<Navigate to="/ProductDetails" replace />} />
+        <Route path="/ProductDetails" element={<ProductView product={{'id':1, 'name':'DoggoLoco', 'description':'DoggoLoco está muy locoshon', 'image':'imagen', 'age': '7 years old.'}} />} />
       </Route>
     </Routes>
   );
