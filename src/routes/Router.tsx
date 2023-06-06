@@ -50,7 +50,7 @@ const Router = () => {
       </Route>
       <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
         <Route path="/" element={<Navigate to="/ProductDetails" replace />} />
-        <Route path="/ProductDetails" element={<ProductView product={{'id':1, 'name':'DoggoLoco', 'description':'DoggoLoco está muy locoshon', 'image':'imagen', 'age': '7 years old.'}} />} />
+        <Route path="/ProductDetails" element={<ProductView product={{'id':1, 'name':'Rocky', 'description':'DoggoLoco está muy locoshon y le gusta el pan tostado, pero se porta mal a veces y roba pan del mercado. No es agresivo. Medio flojo y torpe pero muy cariñoso. Aún cree que es un cahorrito y se te avienta encima como si pesara 5 kilos. Es un cantante nato, muy platicador también.', 'image':'imagen', 'age': '7 years old.'}} />} />
       </Route>
     </Routes>
   );

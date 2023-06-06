@@ -46,9 +46,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
             <List dense>
                 {data.map((item) => (
                     <ListItem key={item.id} alignItems='center'>
-                        <ListItemAvatar>
-                        <Avatar src={item.image} />
-                        </ListItemAvatar>
                         <ListItemText primary={item.name} secondary={item.description} />
                     </ListItem>
                     ))}
@@ -67,7 +64,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
             </CardContent>
             <CardActions disableSpacing>
                 <Button size="small" color="primary" href='/dashboard'>
-                Add to cart
+                Adoptar
                 </Button>
             </CardActions>
           </Card>
@@ -111,20 +108,17 @@ const App: React.FC = () => {
 const data = [
   {
     id: 1,
-    name: 'Age:',
-    description: '7 years old.',
-    image: 'https://via.placeholder.com/50'
+    name: 'Edad:',
+    description: '5 años de edad.',
   },
   {
     id: 2,
-    name: 'Item 2',
-    description: 'Descripción del Item 2',
-    image: 'https://via.placeholder.com/50'
+    name: 'Raza:',
+    description: 'Husky.',
   },
   {
     id: 3,
-    name: 'Item 3',
-    description: 'Descripción del Item 3',
-    image: 'https://via.placeholder.com/50'
+    name: 'Color:',
+    description: 'Gris',
   }
 ];
