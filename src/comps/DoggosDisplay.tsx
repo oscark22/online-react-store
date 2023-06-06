@@ -11,7 +11,7 @@ export default function DoggoDisplay() {
   const [filteredDogs, setFilteredDogs] = React.useState<any[]>([]);
 
   React.useEffect(() => {
-    const descripcion = 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica';
+    const descripcion = 'Este es un perrito muy adorable que busca ser adoptado por una hermosa familia.';
     const srcImg = 'http://cdn0.wideopenpets.com/wp-content/uploads/2017/05/AdobeStock_126472771.jpeg';
 
     for (let i = 0; i < 100; i++) {
